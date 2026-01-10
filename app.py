@@ -126,8 +126,8 @@ st.markdown(f"""
 </style>
 """, unsafe_allow_html=True)
 
-SHEET_ID = "YOUR_SHEET_ID_HERE"
-SHEET_NAME = "Form_Responses"
+SHEET_ID = "1xEYXLgh2UeweXv44RipufxCM9uEc7xk9HpeJKkKdyPo"
+SHEET_NAME = "Form Responses 1"
 
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets.readonly",
