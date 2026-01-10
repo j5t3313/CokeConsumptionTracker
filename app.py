@@ -72,13 +72,6 @@ st.markdown(f"""
         color: white;
     }}
     
-    .leader-name {{
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 3.5rem;
-        margin: 0;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-    }}
-    
     .leader-label {{
         font-family: 'Open Sans', sans-serif;
         font-size: 1rem;
@@ -87,90 +80,12 @@ st.markdown(f"""
         opacity: 0.9;
     }}
     
-    .stat-card {{
-        background: white;
-        border-radius: 15px;
-        padding: 20px;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        border-left: 4px solid {DC_RED};
-        transition: transform 0.2s;
-    }}
-    
-    .stat-card:hover {{
-        transform: translateY(-5px);
-    }}
-    
-    .stat-value {{
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 2.8rem;
-        color: {DC_BLACK};
-        margin: 0;
-    }}
-    
-    .stat-label {{
-        font-family: 'Open Sans', sans-serif;
-        font-size: 0.85rem;
-        color: {DC_DARK_SILVER};
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }}
-    
-    .person-card {{
-        background: white;
-        border-radius: 20px;
-        padding: 25px;
-        margin: 15px 0;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    }}
-    
-    .chart-card {{
-        background: white;
-        border-radius: 20px;
-        padding: 20px;
-        margin: 15px 0;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }}
-    
     [data-testid="stPlotlyChart"] {{
         background: white;
         border-radius: 20px;
         padding: 15px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         margin-bottom: 20px;
-        overflow: visible;
-    }}
-    
-    [data-testid="stPlotlyChart"] > div {{
-        border-radius: 15px;
-    }}
-    
-    .person-header {{
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 2rem;
-        color: {DC_RED};
-        border-bottom: 2px solid {DC_SILVER};
-        padding-bottom: 10px;
-        margin-bottom: 20px;
-    }}
-    
-    .fun-fact {{
-        background: linear-gradient(135deg, {DC_LIGHT_GRAY}, white);
-        border-radius: 12px;
-        padding: 15px;
-        margin: 8px 0;
-        border-left: 3px solid {DC_SILVER};
-    }}
-    
-    .refresh-btn {{
-        background-color: {DC_RED} !important;
-        color: white !important;
-        border-radius: 25px !important;
-        padding: 10px 30px !important;
-        font-family: 'Open Sans', sans-serif !important;
-        font-weight: 600 !important;
-        border: none !important;
-        transition: all 0.3s !important;
     }}
     
     .stButton > button {{
@@ -189,18 +104,6 @@ st.markdown(f"""
         box-shadow: 0 5px 15px rgba(230, 26, 39, 0.4);
     }}
     
-    .activity-table {{
-        border-radius: 15px;
-        overflow: hidden;
-    }}
-    
-    [data-testid="stDataFrame"] {{
-        background: white;
-        border-radius: 20px;
-        padding: 15px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }}
-    
     div[data-testid="stMetricValue"] {{
         font-family: 'Bebas Neue', sans-serif;
         font-size: 2.2rem;
@@ -212,136 +115,19 @@ st.markdown(f"""
         color: {DC_DARK_SILVER};
         text-transform: uppercase;
         letter-spacing: 1px;
-        font-size: 0.85rem;
     }}
     
-    div[data-testid="stMetricLabel"] > div,
-    div[data-testid="stMetricLabel"] p {{
-        color: {DC_DARK_SILVER} !important;
-    }}
-    
-    .stExpander {{
+    [data-testid="stDataFrame"] {{
         background: white;
-        border-radius: 15px;
-        border: none;
+        border-radius: 20px;
+        padding: 15px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }}
-    
-    .vs-divider {{
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 3rem;
-        color: {DC_SILVER};
-        text-align: center;
-    }}
-    
-    div[data-testid="stDataFrame"] {{
-        border-radius: 15px;
-        overflow: hidden;
-    }}
-    
-    @media (max-width: 768px) {{
-        .main-header {{
-            font-size: 2.5rem;
-            letter-spacing: 1px;
-        }}
-        
-        .sub-header {{
-            font-size: 1rem;
-        }}
-        
-        .section-header {{
-            font-size: 1.6rem;
-            margin-top: 25px;
-        }}
-        
-        .leader-card {{
-            padding: 20px;
-            border-radius: 15px;
-        }}
-        
-        .leader-label {{
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-        }}
-        
-        div[data-testid="stMetricValue"] {{
-            font-size: 1.4rem !important;
-        }}
-        
-        div[data-testid="stMetricLabel"] {{
-            font-size: 0.65rem !important;
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            white-space: normal !important;
-            overflow: visible !important;
-            min-height: 20px !important;
-        }}
-        
-        div[data-testid="stMetricLabel"] > div {{
-            display: block !important;
-            visibility: visible !important;
-        }}
-        
-        div[data-testid="stMetricLabel"] p {{
-            display: block !important;
-            visibility: visible !important;
-            font-size: 0.65rem !important;
-        }}
-        
-        [data-testid="stMetric"] {{
-            padding: 8px 0;
-        }}
-        
-        [data-testid="stPlotlyChart"] {{
-            padding: 5px !important;
-            border-radius: 15px;
-            width: 100% !important;
-            overflow: visible !important;
-        }}
-        
-        [data-testid="stPlotlyChart"] > div {{
-            width: 100% !important;
-        }}
-        
-        .js-plotly-plot, .plotly {{
-            width: 100% !important;
-        }}
-        
-        [data-testid="stDataFrame"] {{
-            padding: 5px;
-            overflow-x: auto;
-        }}
-        
-        [data-testid="column"] {{
-            padding: 0 5px;
-            width: 100% !important;
-            flex: 1 1 100% !important;
-        }}
-        
-        [data-testid="stHorizontalBlock"] {{
-            flex-wrap: wrap !important;
-        }}
-        
-        .player-header {{
-            flex-direction: column;
-            gap: 15px;
-        }}
-        
-        .player-header h3 {{
-            font-size: 2rem;
-        }}
-        
-        .fun-facts-inline {{
-            flex-direction: column;
-            gap: 10px;
-        }}
     }}
 </style>
 """, unsafe_allow_html=True)
 
-SHEET_ID = "1xEYXLgh2UeweXv44RipufxCM9uEc7xk9HpeJKkKdyPo"
-SHEET_NAME = "Form Responses 1"
+SHEET_ID = "YOUR_SHEET_ID_HERE"
+SHEET_NAME = "Form_Responses"
 
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets.readonly",
@@ -488,12 +274,11 @@ def style_chart(fig):
     fig.update_layout(
         font_family="Open Sans",
         title_font_family="Bebas Neue",
-        title_font_size=20,
+        title_font_size=24,
         title_font_color=DC_BLACK,
         paper_bgcolor="white",
         plot_bgcolor="rgba(0,0,0,0)",
         margin=dict(l=40, r=40, t=80, b=40),
-        autosize=True,
         legend=dict(
             bgcolor="rgba(255,255,255,0.9)",
             bordercolor=DC_SILVER,
@@ -506,20 +291,17 @@ def style_chart(fig):
         ),
         xaxis=dict(
             gridcolor=DC_LIGHT_GRAY,
-            linecolor=DC_SILVER,
-            automargin=True
+            linecolor=DC_SILVER
         ),
         yaxis=dict(
             gridcolor=DC_LIGHT_GRAY,
-            linecolor=DC_SILVER,
-            automargin=True
+            linecolor=DC_SILVER
         )
     )
     return fig
 
 df = load_data()
 people = df["person"].unique().tolist()
-color_sequence = [get_person_color(p) for p in people]
 
 st.markdown('<h1 class="main-header">DIET COKE TRACKER 2026</h1>', unsafe_allow_html=True)
 st.markdown('<p class="sub-header">Tracking the important things in life</p>', unsafe_allow_html=True)
@@ -542,82 +324,39 @@ if len(leaderboard) >= 2:
     leader = leaderboard.index[0]
     second = leaderboard.index[1]
     lead_margin = int(leaderboard.loc[leader, "total_drinks"] - leaderboard.loc[second, "total_drinks"])
-    total_drinks = int(leaderboard["total_drinks"].sum())
-    total_ounces = int(leaderboard["total_ounces"].sum())
     
-    st.markdown(f"""
-    <style>
-        .leaderboard-container {{
-            display: flex;
-            justify-content: center;
-            align-items: stretch;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }}
-        .leaderboard-card {{
-            flex: 1;
-            min-width: 200px;
-            max-width: 300px;
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-        }}
-        .leader-main {{
-            background: linear-gradient(145deg, {DC_RED}, #B31520);
-            box-shadow: 0 10px 30px rgba(230, 26, 39, 0.3);
-            color: white;
-            flex: 1.5;
-            max-width: 400px;
-        }}
-        .second-place {{
-            background: linear-gradient(145deg, {DC_SILVER}, {DC_DARK_SILVER});
-            color: white;
-        }}
-        .combined-stats {{
-            background: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }}
-        @media (max-width: 768px) {{
-            .leaderboard-container {{
-                flex-direction: column;
-                align-items: center;
-            }}
-            .leaderboard-card {{
-                width: 100%;
-                max-width: 100%;
-            }}
-            .leader-main {{
-                order: 1;
-                max-width: 100%;
-            }}
-            .second-place {{
-                order: 2;
-            }}
-            .combined-stats {{
-                order: 3;
-            }}
-        }}
-    </style>
-    <div class="leaderboard-container">
-        <div class="leaderboard-card second-place">
+    col1, col2, col3 = st.columns([1, 2, 1])
+    
+    with col1:
+        st.markdown(f"""
+        <div style="background: linear-gradient(145deg, {DC_SILVER}, {DC_DARK_SILVER}); border-radius: 20px; padding: 25px; text-align: center; color: white; margin-top: 40px;">
             <p style="font-family: 'Open Sans'; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px;">Second Place</p>
             <p style="font-family: 'Bebas Neue'; font-size: 2.5rem; margin: 0;">{second}</p>
             <p style="font-family: 'Bebas Neue'; font-size: 1.8rem; margin: 5px 0;">{int(leaderboard.loc[second, 'total_drinks'])} drinks</p>
         </div>
-        <div class="leaderboard-card leader-main">
-            <p style="font-family: 'Open Sans'; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; opacity: 0.9;">Current Leader</p>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown(f"""
+        <div class="leader-card">
+            <p class="leader-label">Current Leader</p>
             <p style="font-family: 'Bebas Neue'; font-size: 2.5rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">{leader}</p>
             <p style="font-family: 'Bebas Neue'; font-size: 2.5rem; margin: 10px 0;">{int(leaderboard.loc[leader, 'total_drinks'])} DRINKS</p>
             <p style="font-family: 'Open Sans'; font-size: 1rem;">Leading by {lead_margin} drink{"s" if lead_margin != 1 else ""}</p>
         </div>
-        <div class="leaderboard-card combined-stats">
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        total_drinks = int(leaderboard["total_drinks"].sum())
+        total_ounces = int(leaderboard["total_ounces"].sum())
+        
+        st.markdown(f"""
+        <div style="background: white; border-radius: 20px; padding: 25px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-top: 40px;">
             <p style="font-family: 'Open Sans'; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; color: {DC_DARK_SILVER};">Combined Stats</p>
             <p style="font-family: 'Bebas Neue'; font-size: 2rem; color: {DC_BLACK}; margin: 5px 0;">{total_drinks} drinks</p>
             <p style="font-family: 'Bebas Neue'; font-size: 1.5rem; color: {DC_DARK_SILVER}; margin: 0;">{total_ounces:,} oz</p>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
 st.markdown('<h2 class="section-header">TRENDS</h2>', unsafe_allow_html=True)
 
@@ -638,7 +377,7 @@ fig_drinks = px.line(
 fig_drinks.update_traces(line=dict(width=3), marker=dict(size=10))
 fig_drinks = style_chart(fig_drinks)
 fig_drinks.update_layout(xaxis_title="", yaxis_title="Drinks")
-st.plotly_chart(fig_drinks, use_container_width=True, config={"responsive": True})
+st.plotly_chart(fig_drinks, use_container_width=True)
 
 cumulative = df.sort_values("datetime").copy()
 cumulative["cumulative_ounces"] = cumulative.groupby("person")["ounces"].cumsum()
@@ -655,71 +394,78 @@ fig_cumulative.update_traces(line=dict(width=4))
 fig_cumulative.add_hline(y=1000, line_dash="dash", line_color=DC_SILVER, annotation_text="1000 oz Goal")
 fig_cumulative = style_chart(fig_cumulative)
 fig_cumulative.update_layout(xaxis_title="", yaxis_title="Total Ounces")
-st.plotly_chart(fig_cumulative, use_container_width=True, config={"responsive": True})
+st.plotly_chart(fig_cumulative, use_container_width=True)
 
 st.markdown('<h2 class="section-header">CONSUMPTION PATTERNS</h2>', unsafe_allow_html=True)
 
-hourly = df.groupby(["hour", "person"]).size().reset_index(name="count")
-fig_hourly = px.bar(
-    hourly,
-    x="hour",
-    y="count",
-    color="person",
-    barmode="group",
-    title="DRINKS BY HOUR",
-    color_discrete_map=PERSON_COLORS
-)
-fig_hourly = style_chart(fig_hourly)
-fig_hourly.update_layout(xaxis_title="Hour of Day", yaxis_title="Count")
-st.plotly_chart(fig_hourly, use_container_width=True, config={"responsive": True})
+col1, col2 = st.columns(2)
 
-day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-daily = df.groupby(["day_of_week", "person"]).size().reset_index(name="count")
-daily["day_of_week"] = pd.Categorical(daily["day_of_week"], categories=day_order, ordered=True)
-daily = daily.sort_values("day_of_week")
-fig_daily = px.bar(
-    daily,
-    x="day_of_week",
-    y="count",
-    color="person",
-    barmode="group",
-    title="DRINKS BY DAY OF WEEK",
-    color_discrete_map=PERSON_COLORS
-)
-fig_daily = style_chart(fig_daily)
-fig_daily.update_layout(xaxis_title="", yaxis_title="Count")
-st.plotly_chart(fig_daily, use_container_width=True, config={"responsive": True})
+with col1:
+    hourly = df.groupby(["hour", "person"]).size().reset_index(name="count")
+    fig_hourly = px.bar(
+        hourly,
+        x="hour",
+        y="count",
+        color="person",
+        barmode="group",
+        title="DRINKS BY HOUR",
+        color_discrete_map=PERSON_COLORS
+    )
+    fig_hourly = style_chart(fig_hourly)
+    fig_hourly.update_layout(xaxis_title="Hour of Day", yaxis_title="Count")
+    st.plotly_chart(fig_hourly, use_container_width=True)
 
-format_counts = df.groupby(["format", "person"]).size().reset_index(name="count")
-fig_format = px.bar(
-    format_counts,
-    x="count",
-    y="format",
-    color="person",
-    barmode="group",
-    title="DRINKS BY FORMAT",
-    orientation="h",
-    color_discrete_map=PERSON_COLORS
-)
-fig_format = style_chart(fig_format)
-fig_format.update_layout(xaxis_title="Count", yaxis_title="")
-st.plotly_chart(fig_format, use_container_width=True, config={"responsive": True})
+with col2:
+    day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    daily = df.groupby(["day_of_week", "person"]).size().reset_index(name="count")
+    daily["day_of_week"] = pd.Categorical(daily["day_of_week"], categories=day_order, ordered=True)
+    daily = daily.sort_values("day_of_week")
+    fig_daily = px.bar(
+        daily,
+        x="day_of_week",
+        y="count",
+        color="person",
+        barmode="group",
+        title="DRINKS BY DAY OF WEEK",
+        color_discrete_map=PERSON_COLORS
+    )
+    fig_daily = style_chart(fig_daily)
+    fig_daily.update_layout(xaxis_title="", yaxis_title="Count")
+    st.plotly_chart(fig_daily, use_container_width=True)
 
-drink_type_counts = df.groupby(["drink_type", "person"]).size().reset_index(name="count")
+col1, col2 = st.columns(2)
 
-fig_type = px.bar(
-    drink_type_counts,
-    x="count",
-    y="drink_type",
-    color="person",
-    barmode="group",
-    title="DC VS INFERIOR PRODUCTS",
-    orientation="h",
-    color_discrete_map=PERSON_COLORS
-)
-fig_type = style_chart(fig_type)
-fig_type.update_layout(xaxis_title="Count", yaxis_title="")
-st.plotly_chart(fig_type, use_container_width=True, config={"responsive": True})
+with col1:
+    format_counts = df.groupby(["format", "person"]).size().reset_index(name="count")
+    fig_format = px.bar(
+        format_counts,
+        x="count",
+        y="format",
+        color="person",
+        barmode="group",
+        title="DRINKS BY FORMAT",
+        orientation="h",
+        color_discrete_map=PERSON_COLORS
+    )
+    fig_format = style_chart(fig_format)
+    fig_format.update_layout(xaxis_title="Count", yaxis_title="")
+    st.plotly_chart(fig_format, use_container_width=True)
+
+with col2:
+    drink_type_counts = df.groupby(["drink_type", "person"]).size().reset_index(name="count")
+    fig_type = px.bar(
+        drink_type_counts,
+        x="count",
+        y="drink_type",
+        color="person",
+        barmode="group",
+        title="DC VS INFERIOR PRODUCTS",
+        orientation="h",
+        color_discrete_map=PERSON_COLORS
+    )
+    fig_type = style_chart(fig_type)
+    fig_type.update_layout(xaxis_title="Count", yaxis_title="")
+    st.plotly_chart(fig_type, use_container_width=True)
 
 st.markdown('<h2 class="section-header">PLAYER STATS</h2>', unsafe_allow_html=True)
 
@@ -741,67 +487,19 @@ for person in people:
     peak_hour_str = f"{hour % 12 or 12} {'AM' if hour < 12 else 'PM'}" if hour is not None else "N/A"
     
     st.markdown(f"""
-    <style>
-        .player-card-{person.lower()} {{
-            background: white;
-            border-radius: 20px;
-            padding: 25px 30px;
-            margin: 20px 0;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border-top: 5px solid {person_color};
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }}
-        .player-card-{person.lower()} h3 {{
-            font-family: 'Bebas Neue';
-            font-size: 2.5rem;
-            color: {person_color};
-            margin: 0;
-        }}
-        .fun-facts-row {{
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-        }}
-        .fun-fact-item {{
-            text-align: center;
-        }}
-        @media (max-width: 768px) {{
-            .player-card-{person.lower()} {{
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 20px;
-            }}
-            .player-card-{person.lower()} h3 {{
-                font-size: 2rem;
-            }}
-            .fun-facts-row {{
-                width: 100%;
-                justify-content: space-between;
-                gap: 15px;
-            }}
-            .fun-fact-item {{
-                flex: 1;
-                min-width: 80px;
-            }}
-        }}
-    </style>
-    <div class="player-card-{person.lower()}">
-        <h3>{person.upper()}</h3>
-        <div class="fun-facts-row">
-            <div class="fun-fact-item">
+    <div style="background: white; border-radius: 20px; padding: 25px 30px; margin: 20px 0; box-shadow: 0 8px 25px rgba(0,0,0,0.1); border-top: 5px solid {person_color}; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <h3 style="font-family: 'Bebas Neue'; font-size: 2.5rem; color: {person_color}; margin: 0;">{person.upper()}</h3>
+        <div style="display: flex; gap: 30px; flex-wrap: wrap;">
+            <div style="text-align: center;">
                 <span style="font-family: 'Open Sans'; font-size: 0.75rem; color: #8A8A8A; text-transform: uppercase; letter-spacing: 1px;">Max in One Day</span><br>
                 <span style="font-family: 'Bebas Neue'; font-size: 1.5rem; color: #1A1A1A;">{max_day}</span>
                 <span style="font-family: 'Open Sans'; font-size: 0.8rem; color: #8A8A8A;"> ({max_date_str})</span>
             </div>
-            <div class="fun-fact-item">
+            <div style="text-align: center;">
                 <span style="font-family: 'Open Sans'; font-size: 0.75rem; color: #8A8A8A; text-transform: uppercase; letter-spacing: 1px;">DC Loyalty</span><br>
                 <span style="font-family: 'Bebas Neue'; font-size: 1.5rem; color: {DC_RED};">{loyalty:.0f}%</span>
             </div>
-            <div class="fun-fact-item">
+            <div style="text-align: center;">
                 <span style="font-family: 'Open Sans'; font-size: 0.75rem; color: #8A8A8A; text-transform: uppercase; letter-spacing: 1px;">Peak Hour</span><br>
                 <span style="font-family: 'Bebas Neue'; font-size: 1.5rem; color: #1A1A1A;">{peak_hour_str}</span>
             </div>
@@ -809,18 +507,26 @@ for person in people:
     </div>
     """, unsafe_allow_html=True)
     
-    col1, col2 = st.columns(2)
+    col1, col2, col3, col4 = st.columns(4)
     
     with col1:
         st.metric("Total Drinks", len(person_df))
-        st.metric("Total Ounces", f"{person_df['ounces'].sum():,.0f}")
-        st.metric("Current Streak", f"{current_streak} days")
-        st.metric("Predicted Year-End", f"{predicted_drinks:,}")
-    
     with col2:
         st.metric("Days Active", days_active)
+    with col3:
+        st.metric("Current Streak", f"{current_streak} days")
+    with col4:
+        st.metric("Predicted Year-End", f"{predicted_drinks:,}")
+    
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        st.metric("Total Ounces", f"{person_df['ounces'].sum():,.0f}")
+    with col2:
         st.metric("Avg Drinks/Day", f"{avg_daily:.1f}")
+    with col3:
         st.metric("Longest Streak", f"{longest_streak} days")
+    with col4:
         st.metric("Predicted Ounces", f"{predicted_ounces:,}")
     
     st.markdown("---")
