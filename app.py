@@ -212,6 +212,12 @@ st.markdown(f"""
         color: {DC_DARK_SILVER};
         text-transform: uppercase;
         letter-spacing: 1px;
+        font-size: 0.85rem;
+    }}
+    
+    div[data-testid="stMetricLabel"] > div,
+    div[data-testid="stMetricLabel"] p {{
+        color: {DC_DARK_SILVER} !important;
     }}
     
     .stExpander {{
@@ -259,20 +265,62 @@ st.markdown(f"""
         }}
         
         div[data-testid="stMetricValue"] {{
-            font-size: 1.6rem;
+            font-size: 1.4rem !important;
         }}
         
         div[data-testid="stMetricLabel"] {{
-            font-size: 0.7rem;
+            font-size: 0.65rem !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            white-space: normal !important;
+            overflow: visible !important;
+            min-height: 20px !important;
+        }}
+        
+        div[data-testid="stMetricLabel"] > div {{
+            display: block !important;
+            visibility: visible !important;
+        }}
+        
+        div[data-testid="stMetricLabel"] p {{
+            display: block !important;
+            visibility: visible !important;
+            font-size: 0.65rem !important;
+        }}
+        
+        [data-testid="stMetric"] {{
+            padding: 8px 0;
         }}
         
         [data-testid="stPlotlyChart"] {{
-            padding: 10px;
+            padding: 5px !important;
             border-radius: 15px;
+            width: 100% !important;
+            overflow: visible !important;
+        }}
+        
+        [data-testid="stPlotlyChart"] > div {{
+            width: 100% !important;
+        }}
+        
+        .js-plotly-plot, .plotly {{
+            width: 100% !important;
         }}
         
         [data-testid="stDataFrame"] {{
-            padding: 10px;
+            padding: 5px;
+            overflow-x: auto;
+        }}
+        
+        [data-testid="column"] {{
+            padding: 0 5px;
+            width: 100% !important;
+            flex: 1 1 100% !important;
+        }}
+        
+        [data-testid="stHorizontalBlock"] {{
+            flex-wrap: wrap !important;
         }}
         
         .player-header {{
@@ -440,11 +488,12 @@ def style_chart(fig):
     fig.update_layout(
         font_family="Open Sans",
         title_font_family="Bebas Neue",
-        title_font_size=24,
+        title_font_size=20,
         title_font_color=DC_BLACK,
         paper_bgcolor="white",
         plot_bgcolor="rgba(0,0,0,0)",
-        margin=dict(l=20, r=20, t=80, b=20),
+        margin=dict(l=40, r=40, t=80, b=40),
+        autosize=True,
         legend=dict(
             bgcolor="rgba(255,255,255,0.9)",
             bordercolor=DC_SILVER,
@@ -452,16 +501,18 @@ def style_chart(fig):
             orientation="h",
             yanchor="bottom",
             y=1.02,
-            xanchor="right",
-            x=1
+            xanchor="center",
+            x=0.5
         ),
         xaxis=dict(
             gridcolor=DC_LIGHT_GRAY,
-            linecolor=DC_SILVER
+            linecolor=DC_SILVER,
+            automargin=True
         ),
         yaxis=dict(
             gridcolor=DC_LIGHT_GRAY,
-            linecolor=DC_SILVER
+            linecolor=DC_SILVER,
+            automargin=True
         )
     )
     return fig
@@ -537,8 +588,14 @@ if len(leaderboard) >= 2:
                 max-width: 100%;
             }}
             .leader-main {{
-                order: -1;
+                order: 1;
                 max-width: 100%;
+            }}
+            .second-place {{
+                order: 2;
+            }}
+            .combined-stats {{
+                order: 3;
             }}
         }}
     </style>
@@ -581,7 +638,7 @@ fig_drinks = px.line(
 fig_drinks.update_traces(line=dict(width=3), marker=dict(size=10))
 fig_drinks = style_chart(fig_drinks)
 fig_drinks.update_layout(xaxis_title="", yaxis_title="Drinks")
-st.plotly_chart(fig_drinks, use_container_width=True)
+st.plotly_chart(fig_drinks, use_container_width=True, config={"responsive": True})
 
 cumulative = df.sort_values("datetime").copy()
 cumulative["cumulative_ounces"] = cumulative.groupby("person")["ounces"].cumsum()
@@ -598,79 +655,71 @@ fig_cumulative.update_traces(line=dict(width=4))
 fig_cumulative.add_hline(y=1000, line_dash="dash", line_color=DC_SILVER, annotation_text="1000 oz Goal")
 fig_cumulative = style_chart(fig_cumulative)
 fig_cumulative.update_layout(xaxis_title="", yaxis_title="Total Ounces")
-st.plotly_chart(fig_cumulative, use_container_width=True)
+st.plotly_chart(fig_cumulative, use_container_width=True, config={"responsive": True})
 
 st.markdown('<h2 class="section-header">CONSUMPTION PATTERNS</h2>', unsafe_allow_html=True)
 
-col1, col2 = st.columns(2)
+hourly = df.groupby(["hour", "person"]).size().reset_index(name="count")
+fig_hourly = px.bar(
+    hourly,
+    x="hour",
+    y="count",
+    color="person",
+    barmode="group",
+    title="DRINKS BY HOUR",
+    color_discrete_map=PERSON_COLORS
+)
+fig_hourly = style_chart(fig_hourly)
+fig_hourly.update_layout(xaxis_title="Hour of Day", yaxis_title="Count")
+st.plotly_chart(fig_hourly, use_container_width=True, config={"responsive": True})
 
-with col1:
-    hourly = df.groupby(["hour", "person"]).size().reset_index(name="count")
-    fig_hourly = px.bar(
-        hourly,
-        x="hour",
-        y="count",
-        color="person",
-        barmode="group",
-        title="DRINKS BY HOUR",
-        color_discrete_map=PERSON_COLORS
-    )
-    fig_hourly = style_chart(fig_hourly)
-    fig_hourly.update_layout(xaxis_title="Hour of Day", yaxis_title="Count")
-    st.plotly_chart(fig_hourly, use_container_width=True)
+day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+daily = df.groupby(["day_of_week", "person"]).size().reset_index(name="count")
+daily["day_of_week"] = pd.Categorical(daily["day_of_week"], categories=day_order, ordered=True)
+daily = daily.sort_values("day_of_week")
+fig_daily = px.bar(
+    daily,
+    x="day_of_week",
+    y="count",
+    color="person",
+    barmode="group",
+    title="DRINKS BY DAY OF WEEK",
+    color_discrete_map=PERSON_COLORS
+)
+fig_daily = style_chart(fig_daily)
+fig_daily.update_layout(xaxis_title="", yaxis_title="Count")
+st.plotly_chart(fig_daily, use_container_width=True, config={"responsive": True})
 
-with col2:
-    day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    daily = df.groupby(["day_of_week", "person"]).size().reset_index(name="count")
-    daily["day_of_week"] = pd.Categorical(daily["day_of_week"], categories=day_order, ordered=True)
-    daily = daily.sort_values("day_of_week")
-    fig_daily = px.bar(
-        daily,
-        x="day_of_week",
-        y="count",
-        color="person",
-        barmode="group",
-        title="DRINKS BY DAY OF WEEK",
-        color_discrete_map=PERSON_COLORS
-    )
-    fig_daily = style_chart(fig_daily)
-    fig_daily.update_layout(xaxis_title="", yaxis_title="Count")
-    st.plotly_chart(fig_daily, use_container_width=True)
+format_counts = df.groupby(["format", "person"]).size().reset_index(name="count")
+fig_format = px.bar(
+    format_counts,
+    x="count",
+    y="format",
+    color="person",
+    barmode="group",
+    title="DRINKS BY FORMAT",
+    orientation="h",
+    color_discrete_map=PERSON_COLORS
+)
+fig_format = style_chart(fig_format)
+fig_format.update_layout(xaxis_title="Count", yaxis_title="")
+st.plotly_chart(fig_format, use_container_width=True, config={"responsive": True})
 
-col1, col2 = st.columns(2)
+drink_type_counts = df.groupby(["drink_type", "person"]).size().reset_index(name="count")
 
-with col1:
-    format_counts = df.groupby(["format", "person"]).size().reset_index(name="count")
-    fig_format = px.bar(
-        format_counts,
-        x="count",
-        y="format",
-        color="person",
-        barmode="group",
-        title="DRINKS BY FORMAT",
-        orientation="h",
-        color_discrete_map=PERSON_COLORS
-    )
-    fig_format = style_chart(fig_format)
-    fig_format.update_layout(xaxis_title="Count", yaxis_title="")
-    st.plotly_chart(fig_format, use_container_width=True)
-
-with col2:
-    drink_type_counts = df.groupby(["drink_type", "person"]).size().reset_index(name="count")
-    
-    fig_type = px.bar(
-        drink_type_counts,
-        x="count",
-        y="drink_type",
-        color="person",
-        barmode="group",
-        title="DC VS INFERIOR PRODUCTS",
-        orientation="h",
-        color_discrete_map=PERSON_COLORS
-    )
-    fig_type = style_chart(fig_type)
-    fig_type.update_layout(xaxis_title="Count", yaxis_title="")
-    st.plotly_chart(fig_type, use_container_width=True)
+fig_type = px.bar(
+    drink_type_counts,
+    x="count",
+    y="drink_type",
+    color="person",
+    barmode="group",
+    title="DC VS INFERIOR PRODUCTS",
+    orientation="h",
+    color_discrete_map=PERSON_COLORS
+)
+fig_type = style_chart(fig_type)
+fig_type.update_layout(xaxis_title="Count", yaxis_title="")
+st.plotly_chart(fig_type, use_container_width=True, config={"responsive": True})
 
 st.markdown('<h2 class="section-header">PLAYER STATS</h2>', unsafe_allow_html=True)
 
