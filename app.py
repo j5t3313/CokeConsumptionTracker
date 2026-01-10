@@ -232,6 +232,63 @@ st.markdown(f"""
         border-radius: 15px;
         overflow: hidden;
     }}
+    
+    @media (max-width: 768px) {{
+        .main-header {{
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }}
+        
+        .sub-header {{
+            font-size: 1rem;
+        }}
+        
+        .section-header {{
+            font-size: 1.6rem;
+            margin-top: 25px;
+        }}
+        
+        .leader-card {{
+            padding: 20px;
+            border-radius: 15px;
+        }}
+        
+        .leader-label {{
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }}
+        
+        div[data-testid="stMetricValue"] {{
+            font-size: 1.6rem;
+        }}
+        
+        div[data-testid="stMetricLabel"] {{
+            font-size: 0.7rem;
+        }}
+        
+        [data-testid="stPlotlyChart"] {{
+            padding: 10px;
+            border-radius: 15px;
+        }}
+        
+        [data-testid="stDataFrame"] {{
+            padding: 10px;
+        }}
+        
+        .player-header {{
+            flex-direction: column;
+            gap: 15px;
+        }}
+        
+        .player-header h3 {{
+            font-size: 2rem;
+        }}
+        
+        .fun-facts-inline {{
+            flex-direction: column;
+            gap: 10px;
+        }}
+    }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -434,41 +491,76 @@ if len(leaderboard) >= 2:
     leader = leaderboard.index[0]
     second = leaderboard.index[1]
     lead_margin = int(leaderboard.loc[leader, "total_drinks"] - leaderboard.loc[second, "total_drinks"])
+    total_drinks = int(leaderboard["total_drinks"].sum())
+    total_ounces = int(leaderboard["total_ounces"].sum())
     
-    col1, col2, col3 = st.columns([1, 2, 1])
-    
-    with col1:
-        st.markdown(f"""
-        <div style="background: linear-gradient(145deg, {DC_SILVER}, {DC_DARK_SILVER}); border-radius: 20px; padding: 25px; text-align: center; color: white; margin-top: 40px;">
+    st.markdown(f"""
+    <style>
+        .leaderboard-container {{
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }}
+        .leaderboard-card {{
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+        }}
+        .leader-main {{
+            background: linear-gradient(145deg, {DC_RED}, #B31520);
+            box-shadow: 0 10px 30px rgba(230, 26, 39, 0.3);
+            color: white;
+            flex: 1.5;
+            max-width: 400px;
+        }}
+        .second-place {{
+            background: linear-gradient(145deg, {DC_SILVER}, {DC_DARK_SILVER});
+            color: white;
+        }}
+        .combined-stats {{
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }}
+        @media (max-width: 768px) {{
+            .leaderboard-container {{
+                flex-direction: column;
+                align-items: center;
+            }}
+            .leaderboard-card {{
+                width: 100%;
+                max-width: 100%;
+            }}
+            .leader-main {{
+                order: -1;
+                max-width: 100%;
+            }}
+        }}
+    </style>
+    <div class="leaderboard-container">
+        <div class="leaderboard-card second-place">
             <p style="font-family: 'Open Sans'; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px;">Second Place</p>
             <p style="font-family: 'Bebas Neue'; font-size: 2.5rem; margin: 0;">{second}</p>
             <p style="font-family: 'Bebas Neue'; font-size: 1.8rem; margin: 5px 0;">{int(leaderboard.loc[second, 'total_drinks'])} drinks</p>
         </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown(f"""
-        <div class="leader-card">
-            <p class="leader-label">Current Leader</p>
+        <div class="leaderboard-card leader-main">
+            <p style="font-family: 'Open Sans'; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; opacity: 0.9;">Current Leader</p>
             <p style="font-family: 'Bebas Neue'; font-size: 2.5rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">{leader}</p>
             <p style="font-family: 'Bebas Neue'; font-size: 2.5rem; margin: 10px 0;">{int(leaderboard.loc[leader, 'total_drinks'])} DRINKS</p>
             <p style="font-family: 'Open Sans'; font-size: 1rem;">Leading by {lead_margin} drink{"s" if lead_margin != 1 else ""}</p>
         </div>
-        """, unsafe_allow_html=True)
-    
-    with col3:
-        days_in_year = 365
-        days_passed = (datetime.now().date() - datetime(2026, 1, 1).date()).days
-        total_drinks = int(leaderboard["total_drinks"].sum())
-        total_ounces = int(leaderboard["total_ounces"].sum())
-        
-        st.markdown(f"""
-        <div style="background: white; border-radius: 20px; padding: 25px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-top: 40px;">
+        <div class="leaderboard-card combined-stats">
             <p style="font-family: 'Open Sans'; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; color: {DC_DARK_SILVER};">Combined Stats</p>
             <p style="font-family: 'Bebas Neue'; font-size: 2rem; color: {DC_BLACK}; margin: 5px 0;">{total_drinks} drinks</p>
             <p style="font-family: 'Bebas Neue'; font-size: 1.5rem; color: {DC_DARK_SILVER}; margin: 0;">{total_ounces:,} oz</p>
         </div>
-        """, unsafe_allow_html=True)
+    </div>
+    """, unsafe_allow_html=True)
 
 st.markdown('<h2 class="section-header">TRENDS</h2>', unsafe_allow_html=True)
 
@@ -600,19 +692,67 @@ for person in people:
     peak_hour_str = f"{hour % 12 or 12} {'AM' if hour < 12 else 'PM'}" if hour is not None else "N/A"
     
     st.markdown(f"""
-    <div style="background: white; border-radius: 20px; padding: 25px 30px; margin: 20px 0; box-shadow: 0 8px 25px rgba(0,0,0,0.1); border-top: 5px solid {person_color}; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-        <h3 style="font-family: 'Bebas Neue'; font-size: 2.5rem; color: {person_color}; margin: 0;">{person.upper()}</h3>
-        <div style="display: flex; gap: 30px; flex-wrap: wrap;">
-            <div style="text-align: center;">
+    <style>
+        .player-card-{person.lower()} {{
+            background: white;
+            border-radius: 20px;
+            padding: 25px 30px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-top: 5px solid {person_color};
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }}
+        .player-card-{person.lower()} h3 {{
+            font-family: 'Bebas Neue';
+            font-size: 2.5rem;
+            color: {person_color};
+            margin: 0;
+        }}
+        .fun-facts-row {{
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }}
+        .fun-fact-item {{
+            text-align: center;
+        }}
+        @media (max-width: 768px) {{
+            .player-card-{person.lower()} {{
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+            }}
+            .player-card-{person.lower()} h3 {{
+                font-size: 2rem;
+            }}
+            .fun-facts-row {{
+                width: 100%;
+                justify-content: space-between;
+                gap: 15px;
+            }}
+            .fun-fact-item {{
+                flex: 1;
+                min-width: 80px;
+            }}
+        }}
+    </style>
+    <div class="player-card-{person.lower()}">
+        <h3>{person.upper()}</h3>
+        <div class="fun-facts-row">
+            <div class="fun-fact-item">
                 <span style="font-family: 'Open Sans'; font-size: 0.75rem; color: #8A8A8A; text-transform: uppercase; letter-spacing: 1px;">Max in One Day</span><br>
                 <span style="font-family: 'Bebas Neue'; font-size: 1.5rem; color: #1A1A1A;">{max_day}</span>
                 <span style="font-family: 'Open Sans'; font-size: 0.8rem; color: #8A8A8A;"> ({max_date_str})</span>
             </div>
-            <div style="text-align: center;">
+            <div class="fun-fact-item">
                 <span style="font-family: 'Open Sans'; font-size: 0.75rem; color: #8A8A8A; text-transform: uppercase; letter-spacing: 1px;">DC Loyalty</span><br>
                 <span style="font-family: 'Bebas Neue'; font-size: 1.5rem; color: {DC_RED};">{loyalty:.0f}%</span>
             </div>
-            <div style="text-align: center;">
+            <div class="fun-fact-item">
                 <span style="font-family: 'Open Sans'; font-size: 0.75rem; color: #8A8A8A; text-transform: uppercase; letter-spacing: 1px;">Peak Hour</span><br>
                 <span style="font-family: 'Bebas Neue'; font-size: 1.5rem; color: #1A1A1A;">{peak_hour_str}</span>
             </div>
@@ -620,26 +760,18 @@ for person in people:
     </div>
     """, unsafe_allow_html=True)
     
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2 = st.columns(2)
     
     with col1:
         st.metric("Total Drinks", len(person_df))
-    with col2:
-        st.metric("Days Active", days_active)
-    with col3:
+        st.metric("Total Ounces", f"{person_df['ounces'].sum():,.0f}")
         st.metric("Current Streak", f"{current_streak} days")
-    with col4:
         st.metric("Predicted Year-End", f"{predicted_drinks:,}")
     
-    col1, col2, col3, col4 = st.columns(4)
-    
-    with col1:
-        st.metric("Total Ounces", f"{person_df['ounces'].sum():,.0f}")
     with col2:
+        st.metric("Days Active", days_active)
         st.metric("Avg Drinks/Day", f"{avg_daily:.1f}")
-    with col3:
         st.metric("Longest Streak", f"{longest_streak} days")
-    with col4:
         st.metric("Predicted Ounces", f"{predicted_ounces:,}")
     
     st.markdown("---")
