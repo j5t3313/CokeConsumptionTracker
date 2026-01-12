@@ -27,6 +27,10 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+st.markdown("""
+<meta name="viewport" content="width=1200">
+""", unsafe_allow_html=True)
+
 st.markdown(f"""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap');
