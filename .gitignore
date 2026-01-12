@@ -1,1 +1,10 @@
-dctracker2026-6ec0e78bd1c6.json 
+.streamlit/secrets.toml
+__pycache__/
+*.pyc
+.env
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+.DS_Store
