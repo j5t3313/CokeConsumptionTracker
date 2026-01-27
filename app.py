@@ -457,11 +457,11 @@ fig_cumulative = px.line(
     x="datetime",
     y="cumulative_ounces",
     color="person",
-    title="THE RACE TO 1000 OUNCES",
+    title="THE RACE TO 5000 OUNCES",
     color_discrete_map=PERSON_COLORS
 )
 fig_cumulative.update_traces(line=dict(width=4))
-fig_cumulative.add_hline(y=1000, line_dash="dash", line_color=DC_SILVER, annotation_text="1000 oz Goal")
+fig_cumulative.add_hline(y=5000, line_dash="dash", line_color=DC_SILVER, annotation_text="5000 oz Goal")
 fig_cumulative = style_chart(fig_cumulative)
 fig_cumulative.update_layout(xaxis_title="", yaxis_title="Total Ounces")
 st.plotly_chart(fig_cumulative, use_container_width=True)
